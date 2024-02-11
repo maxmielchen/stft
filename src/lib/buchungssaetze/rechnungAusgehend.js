@@ -30,7 +30,7 @@ function RechnungAusgehend({rechnungsbetrag}) {
     ];
 
     return (
-        <div>
+        <>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -49,7 +49,7 @@ function RechnungAusgehend({rechnungsbetrag}) {
             </Table>
             
             <Buchungssatz dict={dict}/>
-        </div>
+        </>
     );
 }
 

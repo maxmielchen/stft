@@ -37,32 +37,30 @@ function Artikel({ setSumme }) {
     }, [rows, setSumme]);
 
     return (
-        <div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>Nr.</th>
-                        <th>Menge</th>
-                        <th>Preis</th>
-                        <th>Summe</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows.map((row, index) => (
-                        <tr key={index}>
-                            <td>{row.nr}</td>
-                            <td>
-                                <input type="number" name="menge" value={row.menge} onChange={(event) => handleInputChange(event, index)}/>
-                            </td>
-                            <td>
-                                <input type="number" name="preis" value={row.preis} onChange={(event) => handleInputChange(event, index)}/>
-                            </td>
-                            <td>{waehrung(calculateSum(row.menge, row.preis))}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        </div>
+        <Table striped bordered hover>
+            <thead>
+                <tr>
+                    <th>Nr.</th>
+                    <th>Menge</th>
+                    <th>Preis</th>
+                    <th>Summe</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rows.map((row, index) => (
+                    <tr key={index}>
+                        <td>{row.nr}</td>
+                        <td>
+                            <input type="number" name="menge" value={row.menge} onChange={(event) => handleInputChange(event, index)}/>
+                        </td>
+                        <td>
+                            <input type="number" name="preis" value={row.preis} onChange={(event) => handleInputChange(event, index)}/>
+                        </td>
+                        <td>{waehrung(calculateSum(row.menge, row.preis))}</td>
+                     </tr>
+                ))}
+            </tbody>
+        </Table>
     );
 }
 

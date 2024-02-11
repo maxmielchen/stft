@@ -28,48 +28,46 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten })
     }, [summe, rabatt, versandkosten, setRechnungsbetrag]);
 
     return (
-        <div>
-            <Table striped bordered hover>
-                <tbody>
-                    <tr>
-                        <th>Summe</th>
-                        <td>{waehrung(summe)}</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Rabatt</th>
-                        <td>
-                            {waehrung(rabattInEuro())}
-                        </td>
-                        <td>
-                            <input type="number" value={rabatt} onChange={(event) => setRabatt(event.target.value)} />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Versandkosten</th>
-                        <td>
-                            <input type="number" value={versandkosten} onChange={(event) => setVersandkosten(event.target.value)} />
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Gesamtpreis netto</th>
-                        <td>{waehrung(gesamtPreisNetto())}</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>Umsatzsteuer</th>
-                        <td>{waehrung(umsatzsteuer())}</td>
-                        <td>19%</td>
-                    </tr>
-                    <tr>
-                        <th>Rechnungsbetrag</th>
-                        <td>{waehrung(rechnungsbetrag())}</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </Table>
-        </div>
+        <Table striped bordered hover>
+            <tbody>
+                <tr>
+                    <th>Summe</th>
+                    <td>{waehrung(summe)}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Rabatt</th>
+                    <td>
+                        {waehrung(rabattInEuro())}
+                    </td>
+                    <td>
+                        <input type="number" value={rabatt} onChange={(event) => setRabatt(event.target.value)} />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Versandkosten</th>
+                    <td>
+                        <input type="number" value={versandkosten} onChange={(event) => setVersandkosten(event.target.value)} />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Gesamtpreis netto</th>
+                    <td>{waehrung(gesamtPreisNetto())}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Umsatzsteuer</th>
+                    <td>{waehrung(umsatzsteuer())}</td>
+                    <td>19%</td>
+                </tr>
+                <tr>
+                    <th>Rechnungsbetrag</th>
+                    <td>{waehrung(rechnungsbetrag())}</td>
+                    <td></td>
+                </tr>
+             </tbody>
+        </Table>
     );
 }
 

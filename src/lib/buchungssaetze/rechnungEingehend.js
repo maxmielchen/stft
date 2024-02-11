@@ -20,9 +20,7 @@ function RechnungEingehend({rechnungsbetrag, bezugskosten}) {
     }
 
     return (
-        <div>
-            <Buchungssatz dict={dict}/>
-        </div>
+        <Buchungssatz dict={dict}/>
     );
 }
 

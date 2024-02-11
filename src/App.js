@@ -47,7 +47,7 @@ function ThemeSchalter() {
 function Layout() { 
     const [mode, setMode] = useState(modes.EINKAUF)
     return (
-        <div>
+        <>
             <Navbar className="bg-body-tertiary mb-4">
                 <Container>
                     <Navbar.Brand>STFT</Navbar.Brand>
@@ -67,7 +67,7 @@ function Layout() {
             {mode === modes.EINKAUF && <Einkauf />}
             {mode === modes.VERKAUF && <Verkauf />}
 
-        </div>
+        </>
     );
 }
 

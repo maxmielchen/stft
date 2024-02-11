@@ -31,7 +31,7 @@ function ZahlungEingehend({rechnungsbetrag}) {
     }
 
     return (
-        <div>
+        <>
             <Table striped bordered hover>
                 <tbody>
                     <tr>
@@ -43,7 +43,7 @@ function ZahlungEingehend({rechnungsbetrag}) {
                 </tbody>
             </Table>
             <Buchungssatz dict={dict}/>
-        </div>
+        </>
     );
 }
 

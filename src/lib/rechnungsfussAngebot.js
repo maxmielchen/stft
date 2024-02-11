@@ -53,7 +53,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     }, [summe, setRechnungsbetrag]);
 
     return (
-        <div>
+        <>
             <Table striped bordered hover>
                 <tbody>
                     <tr>
@@ -113,7 +113,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                     </tr>
                 </tbody>
             </Table>
-        </div>
+        </>
     );
 }
 
