@@ -1,9 +1,11 @@
+import React from "react";
+
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import waehrung from "./standard/waehrung";
 import prozentWaehrung from "./standard/prozentWaehrung";
 
-function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
+function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, setRechnungsbetrag: (rechnungsbetrag: number) => void }) {
     const [geo, setGeo] = useState('DE');
     const [express, setExpress] = useState(false);
 
@@ -38,7 +40,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     }
 
     const gesamtPreisNetto = () => {
-         return parseFloat(summe) - rabattInEuro() + versandkosten()
+         return summe - rabattInEuro() + versandkosten()
     };
 
     const umsatzsteuer = () => {
@@ -74,6 +76,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                     </tr>
                 </tbody>
             </Table>
+            
             <Table striped bordered hover>
                 <tbody>
                     <tr>

@@ -1,10 +1,11 @@
+import React from "react";
 
 import { Table } from "react-bootstrap";
 import Buchungssatz from "./buchungssatz";
 import { useState } from "react";
 import prozentWaehrung from "../standard/prozentWaehrung";
 
-function ZahlungEingehend({rechnungsbetrag}) {
+function ZahlungEingehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
     let dict;
 
     let [skonto, setSkonto] = useState(2);
@@ -18,8 +19,8 @@ function ZahlungEingehend({rechnungsbetrag}) {
         const skontoInEuro = prozentWaehrung(rechnungsbetrag, 1, skonto/100);
 
         const k2800 = rechnungsbetrag - skontoInEuro;
-        const k5101 = parseFloat(parseFloat(skontoInEuro / 1.19).toFixed(2));
-        const k4800 = parseFloat(parseFloat(skontoInEuro - k5101).toFixed(2));
+        const k5101 = prozentWaehrung(skontoInEuro, 1.19, 1);
+        const k4800 = skontoInEuro - k5101;
 
         dict = [
             { haben: "2800", soll: "", betrag: k2800 },
@@ -36,7 +37,7 @@ function ZahlungEingehend({rechnungsbetrag}) {
                     <tr>
                         <th>Skonto</th>
                         <td>
-                            <input type="number" value={skonto} onChange={(event) => setSkonto(event.target.value)} />
+                            <input type="number" value={skonto} onChange={(event) => setSkonto(parseFloat(event.target.value))} />
                         </td>
                     </tr>
                 </tbody>

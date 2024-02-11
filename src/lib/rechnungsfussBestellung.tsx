@@ -1,9 +1,11 @@
+import React from "react";
+
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import waehrung from "./standard/waehrung";
 import prozentWaehrung from "./standard/prozentWaehrung";
 
-function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten }) {
+function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten }: { summe: number, setRechnungsbetrag: (rechnungsbetrag: number) => void, setBezugskosten: (bezugskosten: number) => void }) {
     const [rabatt, setRabatt] = useState(0);
     const [versandkosten, setVersandkosten] = useState(0);
 
@@ -12,7 +14,7 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten })
     }
 
     const gesamtPreisNetto = () => {
-        return parseFloat(summe) - rabattInEuro() + versandkosten
+        return summe - rabattInEuro() + versandkosten
     };
 
     const umsatzsteuer = () => {
@@ -42,13 +44,13 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten })
                         {waehrung(rabattInEuro())}
                     </td>
                     <td>
-                        <input type="number" value={rabatt} onChange={(event) => setRabatt(event.target.value)} />
+                        <input type="number" value={rabatt} onChange={(event) => setRabatt(parseFloat(event.target.value))} />
                     </td>
                 </tr>
                 <tr>
                     <th>Versandkosten</th>
                     <td>
-                        <input type="number" value={versandkosten} onChange={(event) => setVersandkosten(event.target.value)} />
+                        <input type="number" value={versandkosten} onChange={(event) => setVersandkosten(parseFloat(event.target.value))} />
                     </td>
                     <td></td>
                 </tr>
