@@ -8,11 +8,11 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten })
     const [versandkosten, setVersandkosten] = useState(0);
 
     const rabattInEuro = () => { 
-        return prozentWaehrung(summe, 1, rabatt()/100);
+        return prozentWaehrung(summe, 1, rabatt/100);
     }
 
     const gesamtPreisNetto = () => {
-         return parseFloat(summe) - rabattInEuro() + versandkosten()
+        return parseFloat(summe) - rabattInEuro() + versandkosten
     };
 
     const umsatzsteuer = () => {
