@@ -2,14 +2,14 @@
 import { useState } from "react";
 import Buchungssatz from "./buchungssatz";
 import { Table } from "react-bootstrap";
-import currencyView from "../currencyView";
+import waehrung from "../standard/waehrung";
+import prozentWaehrung from "../standard/prozentWaehrung";
 
 function RechnungAusgehend({rechnungsbetrag}) {
-    //const [geo, setGeo] = useState(0);
     const [skonto, setSkonto] = useState(2);
 
     const skontoBetrag = () => {
-        return parseFloat((rechnungsbetrag * skonto / 100).toFixed(2));
+        return prozentWaehrung(rechnungsbetrag, 1, skonto/100)
     }
 
     const summeOhneSkonto = () => {
@@ -17,11 +17,11 @@ function RechnungAusgehend({rechnungsbetrag}) {
     }
 
     const preisNetto = () => {
-        return parseFloat((rechnungsbetrag/1.19).toFixed(2));
+        return prozentWaehrung(rechnungsbetrag, 1.19, 1);
     }
 
     const preisMwSt = () => {
-        return parseFloat((preisNetto()*0.19).toFixed(2));
+        return rechnungsbetrag - preisNetto();
     }
 
     let dict = [
@@ -31,7 +31,7 @@ function RechnungAusgehend({rechnungsbetrag}) {
     ];
 
     return (
-        <div>
+        <>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -43,13 +43,14 @@ function RechnungAusgehend({rechnungsbetrag}) {
                 <tbody>
                     <tr>
                         <td><input type="number" value={skonto} onChange={e => setSkonto(e.target.value)} /></td>
-                        <td>{currencyView(skontoBetrag())} €</td>
-                        <td>{currencyView(summeOhneSkonto())} €</td>
+                        <td>{waehrung(skontoBetrag())} €</td>
+                        <td>{waehrung(summeOhneSkonto())} €</td>
                     </tr>
                 </tbody>
             </Table>
+            
             <Buchungssatz dict={dict}/>
-        </div>
+        </>
     );
 }
 

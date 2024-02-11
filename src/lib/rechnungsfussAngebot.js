@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import currencyView from "./currencyView";
+import waehrung from "./standard/waehrung";
+import prozentWaehrung from "./standard/prozentWaehrung";
 
 function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     const [geo, setGeo] = useState('DE');
@@ -33,19 +34,19 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     }
 
     const rabattInEuro = () => { 
-        return parseFloat((parseFloat(rabatt()) / 100 * parseFloat(summe)).toFixed(2));
+        return prozentWaehrung(summe, 1, rabatt()/100);
     }
 
     const gesamtPreisNetto = () => {
-        return parseFloat(summe) - rabattInEuro() + parseFloat(versandkosten())
+         return parseFloat(summe) - rabattInEuro() + versandkosten()
     };
 
     const umsatzsteuer = () => {
-        return parseFloat((gesamtPreisNetto() * 0.19).toFixed(2));
+        return prozentWaehrung(gesamtPreisNetto(), 1, 0.19);
     }
 
     const rechnungsbetrag = () => {
-        return parseFloat(gesamtPreisNetto()) + parseFloat(umsatzsteuer());
+        return gesamtPreisNetto() + umsatzsteuer();
     }
 
     useEffect(() => {
@@ -53,7 +54,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     }, [summe, setRechnungsbetrag]);
 
     return (
-        <div>
+        <>
             <Table striped bordered hover>
                 <tbody>
                     <tr>
@@ -77,13 +78,13 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                 <tbody>
                     <tr>
                         <th>Summe</th>
-                        <td>{currencyView(summe)}</td>
+                        <td>{waehrung(summe)}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Rabatt</th>
                         <td>
-                            {currencyView(rabattInEuro())}
+                            {waehrung(rabattInEuro())}
                         </td>
                         <td>
                             {rabatt()}%
@@ -92,28 +93,28 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                     <tr>
                         <th>Versandkosten</th>
                         <td>
-                            {currencyView(versandkosten())}
+                            {waehrung(versandkosten())}
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Gesamtpreis netto</th>
-                        <td>{currencyView(gesamtPreisNetto())}</td>
+                        <td>{waehrung(gesamtPreisNetto())}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Umsatzsteuer</th>
-                        <td>{currencyView(umsatzsteuer())}</td>
+                        <td>{waehrung(umsatzsteuer())}</td>
                         <td>19%</td>
                     </tr>
                     <tr>
                         <th>Rechnungsbetrag</th>
-                        <td>{currencyView(rechnungsbetrag())}</td>
+                        <td>{waehrung(rechnungsbetrag())}</td>
                         <td></td>
                     </tr>
                 </tbody>
             </Table>
-        </div>
+        </>
     );
 }
 

@@ -2,6 +2,7 @@
 import { Table } from "react-bootstrap";
 import Buchungssatz from "./buchungssatz";
 import { useState } from "react";
+import prozentWaehrung from "../standard/prozentWaehrung";
 
 function ZahlungAusgehend({rechnungsbetrag}) {
     let dict;
@@ -14,24 +15,23 @@ function ZahlungAusgehend({rechnungsbetrag}) {
             { haben: "", soll: "2800", betrag: rechnungsbetrag },
         ];
     } else {
-        const skonto_in_euro = parseFloat(parseFloat(rechnungsbetrag * skonto/100).toFixed(2));
+        const skontoInEuro = prozentWaehrung(rechnungsbetrag, 1, skonto/100);
 
-        const überweisungsbetrag = rechnungsbetrag - skonto_in_euro;
-
-        const skonto_ohne_steuer = parseFloat(parseFloat(skonto_in_euro / 1.19).toFixed(2));
-
-        const skonto_steuer = parseFloat(parseFloat(skonto_in_euro - skonto_ohne_steuer).toFixed(2));
+        const k4400 = rechnungsbetrag;
+        const k2800 = k4400 - skontoInEuro;
+        const k6082 = prozentWaehrung(skontoInEuro, 1.19, 1);
+        const k2600 = skontoInEuro - k6082;
 
         dict = [
-            { haben: "4400", soll: "", betrag: rechnungsbetrag },
-            { haben: "", soll: "2800", betrag: überweisungsbetrag },
-            { haben: "", soll: "6082", betrag: skonto_ohne_steuer },
-            { haben: "", soll: "2600", betrag: skonto_steuer },
+            { haben: "4400", soll: "", betrag: k4400 },
+            { haben: "", soll: "2800", betrag: k2800 },
+            { haben: "", soll: "6082", betrag: k6082 },
+            { haben: "", soll: "2600", betrag: k2600 },
         ];
     }
 
     return (
-        <div>
+        <>
             <Table striped bordered hover>
                 <tbody>
                     <tr>
@@ -43,7 +43,7 @@ function ZahlungAusgehend({rechnungsbetrag}) {
                 </tbody>
             </Table>
             <Buchungssatz dict={dict}/>
-        </div>
+        </>
     );
 }
 
