@@ -2,7 +2,7 @@ import React from "react";
 
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, ButtonGroup, Container, Navbar, NavbarText} from "react-bootstrap";
+import { Button, ButtonGroup, Container, NavLink, Navbar, NavbarText} from "react-bootstrap";
 
 import Artikel from "./lib/artikel";
 
@@ -62,7 +62,9 @@ function Layout() {
                         </Button>
                     </ButtonGroup>
                     <ThemeSchalter />
-                    <NavbarText>entwickelt von Max Mielchen</NavbarText>
+                    <NavLink href="https://github.com/maxmielchen/stft" target="_blank" className="text-decoration-none">
+                        <NavbarText>entwickelt von Max Mielchen</NavbarText>
+                    </NavLink>
                 </Container>
             </Navbar>
 
