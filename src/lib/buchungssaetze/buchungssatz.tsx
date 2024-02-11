@@ -1,7 +1,9 @@
+import React from "react";
+
 import { Table } from "react-bootstrap";
 import waehrung from "../standard/waehrung";
 
-function Buchungssatz({dict}) {
+function Buchungssatz({dict}: {dict: {haben: string, soll: string, betrag: number}[]})  {
     return (
         <Table striped bordered hover>
             <thead>

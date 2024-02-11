@@ -1,8 +1,9 @@
+import React from "react";
 
 import prozentWaehrung from "../standard/prozentWaehrung";
 import Buchungssatz from "./buchungssatz";
 
-function RechnungEingehend({rechnungsbetrag, bezugskosten}) {
+function RechnungEingehend({rechnungsbetrag, bezugskosten}: {rechnungsbetrag: number, bezugskosten: number}) {
     let dict;
 
     if (bezugskosten == 0) {
