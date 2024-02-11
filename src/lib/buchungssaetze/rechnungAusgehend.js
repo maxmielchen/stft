@@ -3,12 +3,13 @@ import { useState } from "react";
 import Buchungssatz from "./buchungssatz";
 import { Table } from "react-bootstrap";
 import waehrung from "../standard/waehrung";
+import prozentWaehrung from "../standard/prozentWaehrung";
 
 function RechnungAusgehend({rechnungsbetrag}) {
     const [skonto, setSkonto] = useState(2);
 
     const skontoBetrag = () => {
-        return parseFloat((rechnungsbetrag * skonto / 100).toFixed(2));
+        return prozentWaehrung(rechnungsbetrag, 1, skonto/100)
     }
 
     const summeOhneSkonto = () => {
@@ -16,11 +17,11 @@ function RechnungAusgehend({rechnungsbetrag}) {
     }
 
     const preisNetto = () => {
-        return parseFloat((rechnungsbetrag/1.19).toFixed(2));
+        return prozentWaehrung(rechnungsbetrag, 1.19, 1);
     }
 
     const preisMwSt = () => {
-        return parseFloat((preisNetto()*0.19).toFixed(2));
+        return rechnungsbetrag - preisNetto();
     }
 
     let dict = [

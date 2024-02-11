@@ -2,6 +2,7 @@
 import { Table } from "react-bootstrap";
 import Buchungssatz from "./buchungssatz";
 import { useState } from "react";
+import prozentWaehrung from "../standard/prozentWaehrung";
 
 function ZahlungEingehend({rechnungsbetrag}) {
     let dict;
@@ -14,18 +15,16 @@ function ZahlungEingehend({rechnungsbetrag}) {
             { haben: "", soll: "2400", betrag: rechnungsbetrag },
         ];
     } else {
-        const skonto_in_euro = parseFloat(parseFloat(rechnungsbetrag * skonto/100).toFixed(2));
+        const skontoInEuro = prozentWaehrung(rechnungsbetrag, 1, skonto/100);
 
-        const überweisungsbetrag = rechnungsbetrag - skonto_in_euro;
-
-        const skonto_ohne_steuer = parseFloat(parseFloat(skonto_in_euro / 1.19).toFixed(2));
-
-        const skonto_steuer = parseFloat(parseFloat(skonto_in_euro - skonto_ohne_steuer).toFixed(2));
+        const k2800 = rechnungsbetrag - skontoInEuro;
+        const k5101 = parseFloat(parseFloat(skontoInEuro / 1.19).toFixed(2));
+        const k4800 = parseFloat(parseFloat(skontoInEuro - k5101).toFixed(2));
 
         dict = [
-            { haben: "2800", soll: "", betrag: überweisungsbetrag },
-            { haben: "5101", soll: "", betrag: skonto_ohne_steuer },
-            { haben: "4800", soll: "", betrag: skonto_steuer },
+            { haben: "2800", soll: "", betrag: k2800 },
+            { haben: "5101", soll: "", betrag: k5101 },
+            { haben: "4800", soll: "", betrag: k4800 },
             { haben: "", soll: "2400", betrag: rechnungsbetrag },
         ];
     }
