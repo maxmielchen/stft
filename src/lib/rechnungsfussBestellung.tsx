@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import waehrung from "./standard/waehrung";
 import prozentWaehrung from "./standard/prozentWaehrung";
+import WaehrungBadge from "./standard/waehrungBadge";
 
 function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten }: { summe: number, setRechnungsbetrag: (rechnungsbetrag: number) => void, setBezugskosten: (bezugskosten: number) => void }) {
     const [rabatt, setRabatt] = useState(0);
@@ -35,13 +36,15 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten }:
             <tbody>
                 <tr>
                     <th>Summe</th>
-                    <td>{waehrung(summe)}</td>
+                    <td>
+                        <WaehrungBadge value={summe} />
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <th>Rabatt</th>
                     <td>
-                        {waehrung(rabattInEuro())}
+                        <WaehrungBadge value={rabattInEuro()} />
                     </td>
                     <td>
                         <input type="number" value={rabatt} onChange={(event) => setRabatt(parseFloat(event.target.value))} />
@@ -56,17 +59,23 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten }:
                 </tr>
                 <tr>
                     <th>Gesamtpreis netto</th>
-                    <td>{waehrung(gesamtPreisNetto())}</td>
+                    <td>
+                        <WaehrungBadge value={gesamtPreisNetto()} />
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <th>Umsatzsteuer</th>
-                    <td>{waehrung(umsatzsteuer())}</td>
+                    <td>
+                        <WaehrungBadge value={umsatzsteuer()} />
+                    </td>
                     <td>19%</td>
                 </tr>
                 <tr>
                     <th>Rechnungsbetrag</th>
-                    <td>{waehrung(rechnungsbetrag())}</td>
+                    <td>
+                        <WaehrungBadge value={rechnungsbetrag()} />
+                    </td>
                     <td></td>
                 </tr>
              </tbody>

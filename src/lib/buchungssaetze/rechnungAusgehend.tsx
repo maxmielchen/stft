@@ -5,6 +5,7 @@ import Buchungssatz from "./buchungssatz";
 import { Table } from "react-bootstrap";
 import waehrung from "../standard/waehrung";
 import prozentWaehrung from "../standard/prozentWaehrung";
+import WaehrungBadge from "../standard/waehrungBadge";
 
 function RechnungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
     const [skonto, setSkonto] = useState(2);
@@ -44,8 +45,12 @@ function RechnungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
                 <tbody>
                     <tr>
                         <td><input type="number" value={skonto} onChange={e => setSkonto(parseFloat(e.target.value))} /></td>
-                        <td>{waehrung(skontoBetrag())}</td>
-                        <td>{waehrung(summeOhneSkonto())}</td>
+                        <td>
+                            <WaehrungBadge value={skontoBetrag()} />
+                        </td>
+                        <td>
+                            <WaehrungBadge value={summeOhneSkonto()} />
+                        </td>
                     </tr>
                 </tbody>
             </Table>

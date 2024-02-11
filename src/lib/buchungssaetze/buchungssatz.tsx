@@ -2,6 +2,7 @@ import React from "react";
 
 import { Table } from "react-bootstrap";
 import waehrung from "../standard/waehrung";
+import WaehrungBadge from "../standard/waehrungBadge";
 
 function Buchungssatz({dict}: {dict: {haben: string, soll: string, betrag: number}[]})  {
     return (
@@ -18,7 +19,9 @@ function Buchungssatz({dict}: {dict: {haben: string, soll: string, betrag: numbe
                     <tr key={index}>
                         <td>{row.haben}</td>
                         <td>{row.soll}</td>
-                        <td>{waehrung(row.betrag)}</td>
+                        <td>
+                            <WaehrungBadge value={row.betrag} />
+                        </td>
                     </tr>
                 ))}
             </tbody>
