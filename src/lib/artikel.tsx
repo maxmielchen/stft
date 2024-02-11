@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import waehrung from './standard/waehrung';
 import { Table } from 'react-bootstrap';
+import WaehrungBadge from './standard/waehrungBadge';
 
 function Artikel({ setSumme }: { setSumme: (summe: number) => void }) {
     const [rows, setRows] = useState([
@@ -58,7 +59,9 @@ function Artikel({ setSumme }: { setSumme: (summe: number) => void }) {
                         <td>
                             <input type="number" name="preis" value={row.preis} onChange={(event) => handleInputChange(event, index)}/>
                         </td>
-                        <td>{waehrung(calculateSum(row.menge, row.preis))}</td>
+                        <td>
+                            <WaehrungBadge value={calculateSum(row.menge, row.preis)} />
+                        </td>
                      </tr>
                 ))}
             </tbody>
