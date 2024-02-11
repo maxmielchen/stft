@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup, Container, Navbar, NavbarText} from "react-bootstrap";
 
-import Artikel from "./bib/artikel";
-import RechnungsfussBestellung from "./bib/rechnungsfussBestellung";
-import RechnungEingehend from "./bib/buchungssaetze/rechnungEingehend";
-import ZahlungAusgehend from "./bib/buchungssaetze/zahlungAusgehend";
-import RechnungsfussAngebot from "./bib/rechnungsfussAngebot";
-import RechnungAusgehend from "./bib/buchungssaetze/rechnungAusgehend";
-import Versandkosten from "./bib/versandkosten";
-import ZahlungEingehend from "./bib/buchungssaetze/zahlungEingehend";
+import Artikel from "./lib/artikel";
+
+import RechnungsfussBestellung from "./lib/rechnungsfussBestellung";
+import RechnungsfussAngebot from "./lib/rechnungsfussAngebot";
+
+import RechnungEingehend from "./lib/buchungssaetze/rechnungEingehend";
+import RechnungAusgehend from "./lib/buchungssaetze/rechnungAusgehend";
+
+import ZahlungEingehend from "./lib/buchungssaetze/zahlungEingehend";
+import ZahlungAusgehend from "./lib/buchungssaetze/zahlungAusgehend";
+
+import Versandkosten from "./lib/versandkosten";
 
 function App() {
     return (
