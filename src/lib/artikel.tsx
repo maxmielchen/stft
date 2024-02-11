@@ -1,8 +1,10 @@
+import React from 'react';
+
 import { useEffect, useState } from 'react';
 import waehrung from './standard/waehrung';
 import { Table } from 'react-bootstrap';
 
-function Artikel({ setSumme }) {
+function Artikel({ setSumme }: { setSumme: (summe: number) => void }) {
     const [rows, setRows] = useState([
         { nr: 1, menge: 50, preis: 5 },
         { nr: 2, menge: 0, preis: 0 },

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup, Container, Navbar, NavbarText} from "react-bootstrap";
@@ -96,7 +98,7 @@ function Einkauf() {
 
             <hr />
             <h4>4. Zahlung</h4>
-            <ZahlungAusgehend rechnungsbetrag={rechnungsbetrag} bezugskosten={bezugskosten} />
+            <ZahlungAusgehend rechnungsbetrag={rechnungsbetrag} />
         </Container>
   );
 }

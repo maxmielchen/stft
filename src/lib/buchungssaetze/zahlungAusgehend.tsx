@@ -1,10 +1,11 @@
+import React from "react";
 
 import { Table } from "react-bootstrap";
 import Buchungssatz from "./buchungssatz";
 import { useState } from "react";
 import prozentWaehrung from "../standard/prozentWaehrung";
 
-function ZahlungAusgehend({rechnungsbetrag}) {
+function ZahlungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
     let dict;
 
     let [skonto, setSkonto] = useState(0);
@@ -37,7 +38,7 @@ function ZahlungAusgehend({rechnungsbetrag}) {
                     <tr>
                         <th>Skonto</th>
                         <td>
-                            <input type="number" value={skonto} onChange={(event) => setSkonto(event.target.value)} />
+                            <input type="number" value={skonto} onChange={(event) => setSkonto(parseFloat(event.target.value))} />
                         </td>
                     </tr>
                 </tbody>
