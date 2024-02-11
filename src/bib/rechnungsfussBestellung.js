@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import währung from "./standard/währung";
+import waehrung from "./standard/waehrung";
 
 function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten }) {
     const [rabatt, setRabatt] = useState(0);
@@ -33,13 +33,13 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten })
                 <tbody>
                     <tr>
                         <th>Summe</th>
-                        <td>{währung(summe)}</td>
+                        <td>{waehrung(summe)}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Rabatt</th>
                         <td>
-                            {währung(rabattInEuro())}
+                            {waehrung(rabattInEuro())}
                         </td>
                         <td>
                             <input type="number" value={rabatt} onChange={(event) => setRabatt(event.target.value)} />
@@ -54,17 +54,17 @@ function RechnungsfussBestellung({ summe, setRechnungsbetrag, setBezugskosten })
                     </tr>
                     <tr>
                         <th>Gesamtpreis netto</th>
-                        <td>{währung(gesamtPreisNetto())}</td>
+                        <td>{waehrung(gesamtPreisNetto())}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Umsatzsteuer</th>
-                        <td>{währung(umsatzsteuer())}</td>
+                        <td>{waehrung(umsatzsteuer())}</td>
                         <td>19%</td>
                     </tr>
                     <tr>
                         <th>Rechnungsbetrag</th>
-                        <td>{währung(rechnungsbetrag())}</td>
+                        <td>{waehrung(rechnungsbetrag())}</td>
                         <td></td>
                     </tr>
                 </tbody>

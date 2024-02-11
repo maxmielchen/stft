@@ -4,12 +4,12 @@ import { Button, ButtonGroup, Container, Navbar, NavbarText} from "react-bootstr
 
 import Artikel from "./bib/artikel";
 import RechnungsfussBestellung from "./bib/rechnungsfussBestellung";
-import RechnungEingehend from "./bib/buchungssätze/rechnungEingehend";
-import ZahlungAusgehend from "./bib/buchungssätze/zahlungAusgehend";
+import RechnungEingehend from "./bib/buchungssaetze/rechnungEingehend";
+import ZahlungAusgehend from "./bib/buchungssaetze/zahlungAusgehend";
 import RechnungsfussAngebot from "./bib/rechnungsfussAngebot";
-import RechnungAusgehend from "./bib/buchungssätze/rechnungAusgehend";
+import RechnungAusgehend from "./bib/buchungssaetze/rechnungAusgehend";
 import Versandkosten from "./bib/versandkosten";
-import ZahlungEingehend from "./bib/buchungssätze/zahlungEingehend";
+import ZahlungEingehend from "./bib/buchungssaetze/zahlungEingehend";
 
 function App() {
     return (

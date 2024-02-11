@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Buchungssatz from "./buchungssatz";
 import { Table } from "react-bootstrap";
-import währung from "../standard/währung";
+import waehrung from "../standard/waehrung";
 
 function RechnungAusgehend({rechnungsbetrag}) {
     const [skonto, setSkonto] = useState(2);
@@ -42,8 +42,8 @@ function RechnungAusgehend({rechnungsbetrag}) {
                 <tbody>
                     <tr>
                         <td><input type="number" value={skonto} onChange={e => setSkonto(e.target.value)} /></td>
-                        <td>{währung(skontoBetrag())} €</td>
-                        <td>{währung(summeOhneSkonto())} €</td>
+                        <td>{waehrung(skontoBetrag())} €</td>
+                        <td>{waehrung(summeOhneSkonto())} €</td>
                     </tr>
                 </tbody>
             </Table>

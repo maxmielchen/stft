@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import währung from "./standard/währung";
+import waehrung from "./standard/waehrung";
 
 function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     const [geo, setGeo] = useState('DE');
@@ -77,13 +77,13 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                 <tbody>
                     <tr>
                         <th>Summe</th>
-                        <td>{währung(summe)}</td>
+                        <td>{waehrung(summe)}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Rabatt</th>
                         <td>
-                            {währung(rabattInEuro())}
+                            {waehrung(rabattInEuro())}
                         </td>
                         <td>
                             {rabatt()}%
@@ -92,23 +92,23 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                     <tr>
                         <th>Versandkosten</th>
                         <td>
-                            {währung(versandkosten())}
+                            {waehrung(versandkosten())}
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Gesamtpreis netto</th>
-                        <td>{währung(gesamtPreisNetto())}</td>
+                        <td>{waehrung(gesamtPreisNetto())}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Umsatzsteuer</th>
-                        <td>{währung(umsatzsteuer())}</td>
+                        <td>{waehrung(umsatzsteuer())}</td>
                         <td>19%</td>
                     </tr>
                     <tr>
                         <th>Rechnungsbetrag</th>
-                        <td>{währung(rechnungsbetrag())}</td>
+                        <td>{waehrung(rechnungsbetrag())}</td>
                         <td></td>
                     </tr>
                 </tbody>
