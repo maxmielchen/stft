@@ -1,5 +1,5 @@
 import { Table } from "react-bootstrap";
-import currencyView from "../currencyView";
+import währung from "../standard/währung";
 
 function Buchungssatz({dict}) {
     return (
@@ -17,7 +17,7 @@ function Buchungssatz({dict}) {
                         <tr key={index}>
                             <td>{row.haben}</td>
                             <td>{row.soll}</td>
-                            <td>{currencyView(row.betrag)}</td>
+                            <td>{währung(row.betrag)}</td>
                         </tr>
                     ))}
                 </tbody>

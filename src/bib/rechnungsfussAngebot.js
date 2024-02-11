@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import currencyView from "./currencyView";
+import währung from "./standard/währung";
 
 function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
     const [geo, setGeo] = useState('DE');
@@ -77,13 +77,13 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                 <tbody>
                     <tr>
                         <th>Summe</th>
-                        <td>{currencyView(summe)}</td>
+                        <td>{währung(summe)}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Rabatt</th>
                         <td>
-                            {currencyView(rabattInEuro())}
+                            {währung(rabattInEuro())}
                         </td>
                         <td>
                             {rabatt()}%
@@ -92,23 +92,23 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }) {
                     <tr>
                         <th>Versandkosten</th>
                         <td>
-                            {currencyView(versandkosten())}
+                            {währung(versandkosten())}
                         </td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Gesamtpreis netto</th>
-                        <td>{currencyView(gesamtPreisNetto())}</td>
+                        <td>{währung(gesamtPreisNetto())}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <th>Umsatzsteuer</th>
-                        <td>{currencyView(umsatzsteuer())}</td>
+                        <td>{währung(umsatzsteuer())}</td>
                         <td>19%</td>
                     </tr>
                     <tr>
                         <th>Rechnungsbetrag</th>
-                        <td>{currencyView(rechnungsbetrag())}</td>
+                        <td>{währung(rechnungsbetrag())}</td>
                         <td></td>
                     </tr>
                 </tbody>

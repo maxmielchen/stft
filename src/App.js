@@ -2,15 +2,14 @@ import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ButtonGroup, Container, Navbar, NavbarText} from "react-bootstrap";
 
-import Artikel from "./lib/artikel";
-import RechnungsfussBestellung from "./lib/rechnungsfussBestellung";
-import ToggleSwitch from "./lib/theme";
-import RechnungEingehend from "./lib/buchungssätze/rechnungEingehend";
-import ZahlungAusgehend from "./lib/buchungssätze/zahlungAusgehend";
-import RechnungsfussAngebot from "./lib/rechnungsfussAngebot";
-import RechnungAusgehend from "./lib/buchungssätze/rechnungAusgehend";
-import Versandkosten from "./lib/versandkosten";
-import ZahlungEingehend from "./lib/buchungssätze/zahlungEingehend";
+import Artikel from "./bib/artikel";
+import RechnungsfussBestellung from "./bib/rechnungsfussBestellung";
+import RechnungEingehend from "./bib/buchungssätze/rechnungEingehend";
+import ZahlungAusgehend from "./bib/buchungssätze/zahlungAusgehend";
+import RechnungsfussAngebot from "./bib/rechnungsfussAngebot";
+import RechnungAusgehend from "./bib/buchungssätze/rechnungAusgehend";
+import Versandkosten from "./bib/versandkosten";
+import ZahlungEingehend from "./bib/buchungssätze/zahlungEingehend";
 
 function App() {
     return (
@@ -19,6 +18,27 @@ function App() {
 }
 
 const modes = { EINKAUF: "1", VERKAUF: "2" }
+
+
+function ThemeSchalter() {
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+    useEffect(() => {
+        document.body.dataset.bsTheme = theme;
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    }
+
+    return (
+        <Button size='sm' variant="outline-primary" onClick={toggleTheme}>
+            {theme === 'light' ? '🌞' : '🌙'}
+        </Button>
+    );
+};
 
 function Layout() { 
     const [mode, setMode] = useState(modes.EINKAUF)
@@ -35,8 +55,8 @@ function Layout() {
                             Verkauf
                         </Button>
                     </ButtonGroup>
-                    <ToggleSwitch />
-                    <NavbarText>powered by Max Mielchen</NavbarText>
+                    <ThemeSchalter />
+                    <NavbarText>entwickelt von Max Mielchen</NavbarText>
                 </Container>
             </Navbar>
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
-import currencyView from "./currencyView";
+import währung from "./standard/währung";
 
 function Versandkosten()
 {
@@ -89,8 +89,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{currencyView(calcFpDAL())} €</td>
-                        <td>{currencyView(calcFpDeltapost())} €</td>
+                        <td>{währung(calcFpDAL())} €</td>
+                        <td>{währung(calcFpDeltapost())} €</td>
                     </tr>
 
                     <tr>
@@ -101,8 +101,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{currencyView(calcExDAL())} €</td>
-                        <td>{currencyView(calcExDeltapost())} €</td>
+                        <td>{währung(calcExDAL())} €</td>
+                        <td>{währung(calcExDeltapost())} €</td>
                     </tr>
 
 
@@ -136,8 +136,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{currencyView(calcFpPOC())} €</td>
-                        <td>{currencyView(calcFpPostbox())} €</td>
+                        <td>{währung(calcFpPOC())} €</td>
+                        <td>{währung(calcFpPostbox())} €</td>
                     </tr>
 
                     <tr>
@@ -148,8 +148,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{currencyView(calcExPOC())} €</td>
-                        <td>{currencyView(calcExPostbox())} €</td>
+                        <td>{währung(calcExPOC())} €</td>
+                        <td>{währung(calcExPostbox())} €</td>
                     </tr>
 
 

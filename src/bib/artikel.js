@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import currencyView from './currencyView';
+import währung from './standard/währung';
 import { Table } from 'react-bootstrap';
 
 function Artikel({ setSumme }) {
@@ -57,7 +57,7 @@ function Artikel({ setSumme }) {
                             <td>
                                 <input type="number" name="preis" value={row.preis} onChange={(event) => handleInputChange(event, index)}/>
                             </td>
-                            <td>{currencyView(calculateSum(row.menge, row.preis))}</td>
+                            <td>{währung(calculateSum(row.menge, row.preis))}</td>
                         </tr>
                     ))}
                 </tbody>

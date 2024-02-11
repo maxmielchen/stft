@@ -2,10 +2,9 @@
 import { useState } from "react";
 import Buchungssatz from "./buchungssatz";
 import { Table } from "react-bootstrap";
-import currencyView from "../currencyView";
+import währung from "../standard/währung";
 
 function RechnungAusgehend({rechnungsbetrag}) {
-    //const [geo, setGeo] = useState(0);
     const [skonto, setSkonto] = useState(2);
 
     const skontoBetrag = () => {
@@ -43,11 +42,12 @@ function RechnungAusgehend({rechnungsbetrag}) {
                 <tbody>
                     <tr>
                         <td><input type="number" value={skonto} onChange={e => setSkonto(e.target.value)} /></td>
-                        <td>{currencyView(skontoBetrag())} €</td>
-                        <td>{currencyView(summeOhneSkonto())} €</td>
+                        <td>{währung(skontoBetrag())} €</td>
+                        <td>{währung(summeOhneSkonto())} €</td>
                     </tr>
                 </tbody>
             </Table>
+            
             <Buchungssatz dict={dict}/>
         </div>
     );
