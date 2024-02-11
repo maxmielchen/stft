@@ -91,8 +91,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{waehrung(calcFpDAL())} €</td>
-                        <td>{waehrung(calcFpDeltapost())} €</td>
+                        <td>{waehrung(calcFpDAL())}</td>
+                        <td>{waehrung(calcFpDeltapost())}</td>
                     </tr>
 
                     <tr>
@@ -103,8 +103,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{waehrung(calcExDAL())} €</td>
-                        <td>{waehrung(calcExDeltapost())} €</td>
+                        <td>{waehrung(calcExDAL())}</td>
+                        <td>{waehrung(calcExDeltapost())}</td>
                     </tr>
 
 
@@ -138,8 +138,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{waehrung(calcFpPOC())} €</td>
-                        <td>{waehrung(calcFpPostbox())} €</td>
+                        <td>{waehrung(calcFpPOC())}</td>
+                        <td>{waehrung(calcFpPostbox())}</td>
                     </tr>
 
                     <tr>
@@ -150,8 +150,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Summe</td>
-                        <td>{waehrung(calcExPOC())} €</td>
-                        <td>{waehrung(calcExPostbox())} €</td>
+                        <td>{waehrung(calcExPOC())}</td>
+                        <td>{waehrung(calcExPostbox())}</td>
                     </tr>
 
 

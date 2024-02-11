@@ -44,8 +44,8 @@ function RechnungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
                 <tbody>
                     <tr>
                         <td><input type="number" value={skonto} onChange={e => setSkonto(parseFloat(e.target.value))} /></td>
-                        <td>{waehrung(skontoBetrag())} €</td>
-                        <td>{waehrung(summeOhneSkonto())} €</td>
+                        <td>{waehrung(skontoBetrag())}</td>
+                        <td>{waehrung(summeOhneSkonto())}</td>
                     </tr>
                 </tbody>
             </Table>
