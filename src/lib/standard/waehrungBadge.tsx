@@ -10,7 +10,7 @@ function WaehrungBadge({ value }: { value: number }) {
     }
 
     return (
-        <Button size="sm" onClick={handleClick}>
+        <Button variant="secondary" size="sm" onClick={handleClick}>
             {euro} €
         </Button>
     );
