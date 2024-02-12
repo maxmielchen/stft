@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import waehrung from "./waehrung";
+import { Button } from "react-bootstrap";
 
 function WaehrungBadge({ value }: { value: number }) {
-    const [isPressed, setIsPressed] = useState(false);
-
     const euro = waehrung(value);
 
     const handleClick = async () => {
-        setIsPressed(true);
         await navigator.clipboard.writeText(euro);
-        window.setTimeout(() => setIsPressed(false), 50);
     }
 
     return (
-        <span className={`badge ${isPressed ? 'bg-secondary' : 'bg-primary'}`}  style={{cursor: 'pointer'}} onClick={handleClick}>
+        <Button variant="secondary" size="sm" onClick={handleClick}>
             {euro} €
-        </span>
+        </Button>
     );
 }
 

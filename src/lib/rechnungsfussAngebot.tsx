@@ -82,7 +82,9 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
                 <tbody>
                     <tr>
                         <th>Summe</th>
-                        <td>{waehrung(summe)}</td>
+                        <td>
+                            <WaehrungBadge value={summe} />
+                        </td>
                         <td></td>
                     </tr>
                     <tr>
