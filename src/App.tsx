@@ -40,7 +40,7 @@ function ThemeSchalter() {
     }
 
     return (
-        <Button size='sm' variant="outline-primary" onClick={toggleTheme}>
+        <Button size='sm' variant="outline-secondary" onClick={toggleTheme}>
             {theme === 'light' ? '🌞' : '🌙'}
         </Button>
     );
