@@ -7,12 +7,19 @@ on:
 
 jobs:
 
-  build:
+  load_code:
+    name: Load Code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node.js
+
+  build:
+    name: Build
+    needs: load_code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -20,3 +27,51 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+
+  buildx:
+    name: Buildx
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+  
+  login:
+    name: Login
+    needs: buildx
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+  metadata:
+    name: Metadata
+    needs: buildx
+    runs-on: ubuntu-latest
+    steps:
+      - id: meta
+        uses: docker/metadata-action@v5.0.0
+        with:
+          images: ghcr.io/${{ github.repository }}/stft
+
+  build_and_push:
+    name: Build and Push
+    needs: [load_code, buildx, login, metadata]
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Push to GHCR
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ needs.metadata.steps.meta.outputs.tags }}
+          labels: ${{ needs.metadata.steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
