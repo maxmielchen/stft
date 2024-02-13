@@ -47,7 +47,7 @@ jobs:
         name: Extract metadata
         uses: docker/metadata-action@v5.5.1
         with:
-          images: ghcr.io/${{ github.repository }}/stft
+          images: ghcr.io/${{ github.repository }}
     outputs: 
       tags: ${{ steps.meta.outputs.tags }}
       labels: ${{ steps.meta.outputs.labels }}
