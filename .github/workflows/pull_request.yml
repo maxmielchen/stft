@@ -66,9 +66,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: meta
+        name: Extract metadata
         uses: docker/metadata-action@v5.0.0
         with:
           images: ghcr.io/${{ github.repository }}/stft
+      - name: Archive metadata
+        uses: actions/upload-artifact@v2
+        with:
+          name: metadata
+          path: .docker
 
   build_and_push:
     name: Build and Push
@@ -82,13 +88,17 @@ jobs:
         with:
           name: source-code
           path: .
-          
+      
+      - name: Download metadata
+        uses: actions/download-artifact@v2
+        with:
+          name: metadata
+          path: .docker
+
       - name: Push to GHCR
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ needs.metadata.steps.meta.outputs.tags }}
-          labels: ${{ needs.metadata.steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
