@@ -3,49 +3,80 @@ name: Release
 on:
   release:
     types: [published]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
+  
 jobs:
 
-  build:
+  load_code:
+    permissions:
+      contents: read
+    name: Load Code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Archive code
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: source-code
+          path: .
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+  build:
+    name: Build
+    needs: load_code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v4.1.2
+        with:
+          name: source-code
+          path: .
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
       - name: Install Dependencies
         run: npm install
-
       - name: Build
         run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload builded code
+        uses: actions/upload-artifact@v4.3.1
         with:
-            name: github-pages
-            path: dist/
+          name: dist
+          path: dist
+
+  dist_to_page:
+    name: Dist to Page
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download builded code
+        uses: actions/download-artifact@v4.1.2
+        with:
+          name: dist
+          path: dist
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          name: github-pages
+          path: dist/
 
   deploy:
+    name: Deploy
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: https://stft.max.mielchen.io
     runs-on: ubuntu-latest
-    needs: build
+    needs: dist_to_page
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.4
