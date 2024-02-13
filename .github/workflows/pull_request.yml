@@ -7,16 +7,83 @@ on:
 
 jobs:
 
-  build:
+  load_code:
+    name: Load Code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Archive code
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: source-code
+          path: .
+
+  build:
+    name: Build
+    needs: load_code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v4.1.2
+        with:
+          name: source-code
+          path: .
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: 20
       - name: Install Dependencies
         run: npm install
       - name: Build
         run: npm run build
+
+  metadata:
+    name: Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - id: meta
+        name: Extract metadata
+        uses: docker/metadata-action@v5.5.1
+        with:
+          images: ghcr.io/${{ github.repository }}
+    outputs: 
+      tags: ${{ steps.meta.outputs.tags }}
+      labels: ${{ steps.meta.outputs.labels }}
+
+
+  containerize:
+    name: Containerize
+    needs: [load_code, metadata]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      packages: write
+    steps:
+      - name: Download code
+        uses: actions/download-artifact@v4.1.2
+        with:
+          name: source-code
+          path: .
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.0.0
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to ghcr.io
+        uses: docker/build-push-action@v5.1.0
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+
+          tags: ${{ needs.metadata.outputs.tags }}
+          labels: ${{ needs.metadata.outputs.labels }}

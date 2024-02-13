@@ -1,0 +1,7 @@
+.git/
+.parcel-cache/
+dist/
+node_modules/
+.gitignore
+package-lock.json
+readme.md
