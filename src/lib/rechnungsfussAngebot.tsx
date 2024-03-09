@@ -2,7 +2,6 @@ import React from "react";
 
 import { useEffect, useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
-import waehrung from "./standard/waehrung";
 import prozentWaehrung from "./standard/prozentWaehrung";
 import WaehrungBadge from "./standard/waehrungBadge";
 
