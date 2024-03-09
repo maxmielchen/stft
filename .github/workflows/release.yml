@@ -73,7 +73,7 @@ jobs:
       cancel-in-progress: false
     environment:
       name: github-pages
-      url: https://stft.max.mielchen.io
+      url: https://maxmielchen.github.io/stft/
     runs-on: ubuntu-latest
     needs: dist_to_page
     steps:
