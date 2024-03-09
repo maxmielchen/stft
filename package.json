@@ -1,6 +1,6 @@
 {
   "name": "stft",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simtrade Farming Tool",
   "source": "src/index.html",
   "scripts": {
