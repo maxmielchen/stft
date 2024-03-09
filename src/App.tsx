@@ -95,7 +95,7 @@ function Einkauf() {
             <RechnungsfussBestellung summe={summe} setRechnungsbetrag={setRechnungsbetrag} setBezugskosten={setBezugskosten} />
 
             <hr />
-            <h4>3. Bestellung</h4>
+            <h4>3. Rechnung</h4>
             <RechnungEingehend rechnungsbetrag={rechnungsbetrag} bezugskosten={bezugskosten} />
 
             <hr />
