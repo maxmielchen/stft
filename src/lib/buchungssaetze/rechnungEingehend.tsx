@@ -19,7 +19,7 @@ function RechnungEingehend({rechnungsbetrag, bezugskosten}: {rechnungsbetrag: nu
     } else {
         const k6080 = prozentWaehrung(rechnungsbetrag, 1.19, 1.0) - bezugskosten;
         const k6081 = bezugskosten;
-        const k2600 = rechnungsbetrag - k6080;
+        const k2600 = rechnungsbetrag - k6080 - k6081;
         const k4400 = rechnungsbetrag;
         
         dict = [
