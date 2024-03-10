@@ -3,15 +3,16 @@ import React from "react";
 import { useState } from "react";
 import Buchungssatz from "./buchungssatz";
 import { Table } from "react-bootstrap";
-import waehrung from "../standard/waehrung";
 import prozentWaehrung from "../standard/prozentWaehrung";
 import WaehrungBadge from "../standard/waehrungBadge";
+import nec from "../standard/nec";
 
 function RechnungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
-    const [skonto, setSkonto] = useState(2);
+    const [skonto, setSkonto] = useState("2");
+    let getSkonto = nec(skonto);
 
     const skontoBetrag = () => {
-        return prozentWaehrung(rechnungsbetrag, 1, skonto/100)
+        return prozentWaehrung(rechnungsbetrag, 1, getSkonto/100)
     }
 
     const summeOhneSkonto = () => {
@@ -44,7 +45,7 @@ function RechnungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="number" value={skonto} onChange={e => setSkonto(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={skonto} onChange={e => setSkonto(e.target.value)} /></td>
                         <td>
                             <WaehrungBadge value={skontoBetrag()} />
                         </td>
