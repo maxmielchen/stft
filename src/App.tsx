@@ -2,7 +2,7 @@ import React from "react";
 
 import { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, ButtonGroup, Container, NavLink, Navbar, NavbarText} from "react-bootstrap";
+import { Badge, Button, ButtonGroup, Container, NavLink, Navbar, NavbarText} from "react-bootstrap";
 
 import Artikel from "./lib/artikel";
 
@@ -97,6 +97,7 @@ function Einkauf() {
             <hr />
             <h4>3. Rechnung</h4>
             <RechnungEingehend rechnungsbetrag={rechnungsbetrag} bezugskosten={bezugskosten} />
+            <Badge bg="danger">Drucke die Rechnung!</Badge>
 
             <hr />
             <h4>4. Zahlung</h4>
