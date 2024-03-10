@@ -10,15 +10,21 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
     const [geo, setGeo] = useState('DE');
     const [express, setExpress] = useState(false);
 
+    const [manuelleVersandkosten, setManuelleVersandkosten] = useState(false);
+    const [versandkostenM, setVersandkostenM] = useState("0");
+    let getManuelleVersandkosten = nec(versandkostenM);
+
+    const [versandModal, setVersandModal] = useState(false);
+
     const [manuellerRabatt, setManuellerRabatt] = useState(false);
-    const [rabattProzent, setRabattProzent] = useState("0");
-    let getRabattProzent = nec(rabattProzent);
+    const [rabattProzentM, setRabattProzentM] = useState("0");
+    let getManuellerRabattProzent = nec(rabattProzentM);
 
     const [rabattModal, setRabattModal] = useState(false);
 
     const rabatt = () => {
         if (manuellerRabatt) {
-            return getRabattProzent;
+            return getManuellerRabattProzent;
         }
         if (summe >= 10000) {
             return 10;
@@ -30,6 +36,9 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
     }
 
     const versandkosten = () => {
+        if (manuelleVersandkosten) {
+            return getManuelleVersandkosten;
+        }
         let kosten = 0;
         if (express == true) {
             kosten += 30;
@@ -67,25 +76,6 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
 
     return (
         <>
-            <Table striped bordered hover>
-                <tbody>
-                    <tr>
-                        <th>Geo</th>
-                        <td>
-                            <select value={geo} onChange={(event) => setGeo(event.target.value)}>
-                                <option value="DE">DE</option>
-                                <option value="EU">EU</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Express</th>
-                        <td>
-                            <input type="checkbox" checked={express} onChange={(event) => setExpress(event.target.checked)} />
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
             
             <Table striped bordered hover>
                 <tbody>
@@ -120,7 +110,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
                                             <tr>
                                                 <th>Rabatt in %</th>
                                                 <td>
-                                                    <input type="number" value={rabattProzent} onChange={(event) => setRabattProzent(event.target.value)} />
+                                                    <input type="number" value={rabattProzentM} onChange={(event) => setRabattProzentM(event.target.value)} />
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -139,7 +129,52 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
                         <td>
                             <WaehrungBadge value={versandkosten()} />
                         </td>
-                        <td></td>
+                        <td>
+                            <Button variant="outline-secondary" size="sm" onClick={() => setVersandModal(true)} className="ms-2">Ändern</Button>
+                            <Modal show={versandModal} onHide={() => setVersandModal(false)}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Versandkosten ändern</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <th>Manuelle Versandkosten</th>
+                                                <td>
+                                                    <input type="checkbox" checked={manuelleVersandkosten} onChange={(event) => setManuelleVersandkosten(event.target.checked)} />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Manuelle Versandkosten in €</th>
+                                                <td>
+                                                    <input type="number" value={versandkostenM} onChange={(event) => setVersandkostenM(event.target.value)} />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Expressversand</th>
+                                                <td>
+                                                    <input type="checkbox" checked={express} onChange={(event) => setExpress(event.target.checked)} />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Geo</th>
+                                                <td>
+                                                    <select value={geo} onChange={(event) => setGeo(event.target.value)}>
+                                                        <option value="DE">DE</option>
+                                                        <option value="EU">EU</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="success" onClick={() => setVersandModal(false)}>
+                                        Fertig
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+                        </td>
                     </tr>
                     <tr>
                         <th>Gesamtpreis netto</th>
