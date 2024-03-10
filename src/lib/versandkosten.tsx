@@ -7,7 +7,8 @@ import nec from "./standard/nec";
 
 function Versandkosten()
 {
-    const [kg, setKg] = useState(0);
+    const [kg, setKg] = useState("0");
+    let getKg = nec(kg);
 
     const [fpDAL, setFpDAL] = useState("0");
     let getFpDAL = nec(fpDAL);
@@ -28,19 +29,19 @@ function Versandkosten()
     let getKgPostbox = nec(kgPostbox);
 
     const calcFpDAL = () => {
-        return kg * getKgDAL + getFpDAL;
+        return getKg * getKgDAL + getFpDAL;
     }
 
     const calcFpDeltapost = () => {
-        return kg * getKgDeltapost + getFpDeltapost;
+        return getKg * getKgDeltapost + getFpDeltapost;
     }
 
     const calcFpPOC = () => {
-        return kg * getKgPOC + getFpPOC;
+        return getKg * getKgPOC + getFpPOC;
     }
 
     const calcFpPostbox = () => {
-        return kg * getKgPostbox + getFpPostbox;
+        return getKg * getKgPostbox + getFpPostbox;
     }
 
     const [exDAL, setExDAL] = useState("0");
@@ -53,19 +54,19 @@ function Versandkosten()
     let getExPostbox = nec(exPostbox);
 
     const calcExDAL = () => {
-        return kg * getExDAL + calcFpDAL();
+        return getKg * getExDAL + calcFpDAL();
     }
 
     const calcExDeltapost = () => {
-        return kg * getxDeltapost + calcFpDeltapost();
+        return getKg * getxDeltapost + calcFpDeltapost();
     }
 
     const calcExPOC = () => {
-        return kg * getExPOC + calcFpPOC();
+        return getKg * getExPOC + calcFpPOC();
     }
 
     const calcExPostbox = () => {
-        return kg * getExPostbox + calcFpPostbox();
+        return getKg * getExPostbox + calcFpPostbox();
     }
 
     return (
@@ -74,7 +75,7 @@ function Versandkosten()
                 <tbody>
                     <tr>
                         <th>Gewicht</th>
-                        <td><input type="number" value={kg} onChange={e => setKg(nec(e.target.value))} /> kg</td>
+                        <td><input type="number" value={kg} onChange={e => setKg(e.target.value)} /> kg</td>
                     </tr>
                 </tbody>
             </Table>
