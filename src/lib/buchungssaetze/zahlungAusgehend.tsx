@@ -4,19 +4,21 @@ import { Table } from "react-bootstrap";
 import Buchungssatz from "./buchungssatz";
 import { useState } from "react";
 import prozentWaehrung from "../standard/prozentWaehrung";
+import nec from "../standard/nec";
 
 function ZahlungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
     let dict;
 
-    let [skonto, setSkonto] = useState(0);
+    const [skonto, setSkonto] = useState("0");
+    let getSkonto = nec(skonto);
 
-    if (skonto == 0) {
+    if (getSkonto == 0) {
         dict = [
             { haben: "4400", soll: "", betrag: rechnungsbetrag },
             { haben: "", soll: "2800", betrag: rechnungsbetrag },
         ];
     } else {
-        const skontoInEuro = prozentWaehrung(rechnungsbetrag, 1, skonto/100);
+        const skontoInEuro = prozentWaehrung(rechnungsbetrag, 1, getSkonto/100);
 
         const k4400 = rechnungsbetrag;
         const k2800 = k4400 - skontoInEuro;
@@ -38,7 +40,7 @@ function ZahlungAusgehend({rechnungsbetrag}: {rechnungsbetrag: number}) {
                     <tr>
                         <th>Skonto</th>
                         <td>
-                            <input type="number" value={skonto} onChange={(event) => setSkonto(parseFloat(event.target.value))} />
+                            <input type="number" value={skonto} onChange={(event) => setSkonto(event.target.value)} />
                         </td>
                     </tr>
                 </tbody>

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useEffect, useState } from 'react';
-import waehrung from './standard/waehrung';
 import { Table } from 'react-bootstrap';
 import WaehrungBadge from './standard/waehrungBadge';
 
@@ -24,10 +23,6 @@ function Artikel({ setSumme }: { setSumme: (summe: number) => void }) {
         const target = event.target;
         let value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-
-        if (name === 'preis' && isNaN(parseFloat(value))) {
-            return;
-        }
 
         let newRows = [...rows];
         newRows[index][name] = value;
