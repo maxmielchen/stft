@@ -2,58 +2,70 @@ import React from "react";
 
 import { useState } from "react";
 import { Table } from "react-bootstrap";
-import waehrung from "./standard/waehrung";
 import WaehrungBadge from "./standard/waehrungBadge";
+import nec from "./standard/nec";
 
 function Versandkosten()
 {
     const [kg, setKg] = useState(0);
 
-    const [fpDAL, setFpDAL] = useState(0);
-    const [fpDeltapost, setFpDeltapost] = useState(0);
-    const [fpPOC, setFpPOC] = useState(0);
-    const [fpPostbox, setFpPostbox] = useState(0);
+    const [fpDAL, setFpDAL] = useState("0");
+    let getFpDAL = nec(fpDAL);
+    const [fpDeltapost, setFpDeltapost] = useState("0");
+    let getFpDeltapost = nec(fpDeltapost);
+    const [fpPOC, setFpPOC] = useState("0");
+    let getFpPOC = nec(fpPOC);
+    const [fpPostbox, setFpPostbox] = useState("0");
+    let getFpPostbox = nec(fpPostbox);
 
-    const [kgDAL, setKgDAL] = useState(0);
-    const [kgDeltapost, setKgDeltapost] = useState(0);
-    const [kgPOC, setKgPOC] = useState(0);
-    const [kgPostbox, setKgPostbox] = useState(0);
+    const [kgDAL, setKgDAL] = useState("0");
+    let getKgDAL = nec(kgDAL);
+    const [kgDeltapost, setKgDeltapost] = useState("0");
+    let getKgDeltapost = nec(kgDeltapost);
+    const [kgPOC, setKgPOC] = useState("0");
+    let getKgPOC = nec(kgPOC);
+    const [kgPostbox, setKgPostbox] = useState("0");
+    let getKgPostbox = nec(kgPostbox);
 
     const calcFpDAL = () => {
-        return kg * kgDAL + fpDAL;
+        return kg * getKgDAL + getFpDAL;
     }
 
     const calcFpDeltapost = () => {
-        return kg * kgDeltapost + fpDeltapost;
+        return kg * getKgDeltapost + getFpDeltapost;
     }
 
     const calcFpPOC = () => {
-        return kg * kgPOC + fpPOC;
+        return kg * getKgPOC + getFpPOC;
     }
 
     const calcFpPostbox = () => {
-        return kg * kgPostbox + fpPostbox;
+        return kg * getKgPostbox + getFpPostbox;
     }
 
-    const [exDAL, setExDAL] = useState(0);
-    const [exDeltapost, setExDeltapost] = useState(0);
-    const [exPOC, setExPOC] = useState(0);
-    const [exPostbox, setExPostbox] = useState(0);
+    const [exDAL, setExDAL] = useState("0");
+    let getExDAL = nec(exDAL);
+    const [exDeltapost, setExDeltapost] = useState("0");
+    let getxDeltapost = nec(exDeltapost);
+    const [exPOC, setExPOC] = useState("0");
+    let getExPOC = nec(exPOC);
+    const [exPostbox, setExPostbox] = useState("0");
+    let getExPostbox = nec(exPostbox);
 
     const calcExDAL = () => {
-        return kg * exDAL + calcFpDAL();
+        return kg * getExDAL + calcFpDAL();
     }
 
     const calcExDeltapost = () => {
-        return kg * exDeltapost + calcFpDeltapost();
+        return kg * getxDeltapost + calcFpDeltapost();
     }
 
     const calcExPOC = () => {
-        return kg * exPOC + calcFpPOC(); 
+        return kg * getExPOC + calcFpPOC();
     }
 
     const calcExPostbox = () => {
-        return kg * exPostbox + calcFpPostbox();
+        return kg * getExPostbox + calcFpPostbox();
     }
 
     return (
@@ -62,7 +74,7 @@ function Versandkosten()
                 <tbody>
                     <tr>
                         <th>Gewicht</th>
-                        <td><input type="number" value={kg} onChange={e => setKg(parseFloat(e.target.value))} /> kg</td>
+                        <td><input type="number" value={kg} onChange={e => setKg(nec(e.target.value))} /> kg</td>
                     </tr>
                 </tbody>
             </Table>
@@ -80,14 +92,14 @@ function Versandkosten()
                 <tbody>
                     <tr>
                         <td>Festpreis</td>
-                        <td><input type="number" value={fpDAL} onChange={e => setFpDAL(parseFloat(e.target.value))} /></td>
-                        <td><input type="number" value={fpDeltapost} onChange={e => setFpDeltapost(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={fpDAL} onChange={e => setFpDAL(e.target.value)} /></td>
+                        <td><input type="number" value={fpDeltapost} onChange={e => setFpDeltapost(e.target.value)} /></td>
                     </tr>
 
                     <tr>
                         <td>Kilopreis</td>
-                        <td><input type="number" value={kgDAL} onChange={e => setKgDAL(parseFloat(e.target.value))} /></td>
-                        <td><input type="number" value={kgDeltapost} onChange={e => setKgDeltapost(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={kgDAL} onChange={e => setKgDAL(e.target.value)} /></td>
+                        <td><input type="number" value={kgDeltapost} onChange={e => setKgDeltapost(e.target.value)} /></td>
                     </tr>
 
                     <tr>
@@ -102,8 +114,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Express</td>
-                        <td><input type="number" value={exDAL} onChange={e => setExDAL(parseFloat(e.target.value))} /></td>
-                        <td><input type="number" value={exDeltapost} onChange={e => setExDeltapost(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={exDAL} onChange={e => setExDAL(e.target.value)} /></td>
+                        <td><input type="number" value={exDeltapost} onChange={e => setExDeltapost(e.target.value)} /></td>
                     </tr>
 
                     <tr>
@@ -135,14 +147,14 @@ function Versandkosten()
                 <tbody>
                     <tr>
                         <td>Festpreis</td>
-                        <td><input type="number" value={fpPOC} onChange={e => setFpPOC(parseFloat(e.target.value))} /></td>
-                        <td><input type="number" value={fpPostbox} onChange={e => setFpPostbox(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={fpPOC} onChange={e => setFpPOC(e.target.value)} /></td>
+                        <td><input type="number" value={fpPostbox} onChange={e => setFpPostbox(e.target.value)} /></td>
                     </tr>
 
                     <tr>
                         <td>Kilopreis</td>
-                        <td><input type="number" value={kgPOC} onChange={e => setKgPOC(parseFloat(e.target.value))} /></td>
-                        <td><input type="number" value={kgPostbox} onChange={e => setKgPostbox(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={kgPOC} onChange={e => setKgPOC(e.target.value)} /></td>
+                        <td><input type="number" value={kgPostbox} onChange={e => setKgPostbox(e.target.value)} /></td>
                     </tr>
 
                     <tr>
@@ -157,8 +169,8 @@ function Versandkosten()
 
                     <tr>
                         <td>Express</td>
-                        <td><input type="number" value={exPOC} onChange={e => setExPOC(parseFloat(e.target.value))} /></td>
-                        <td><input type="number" value={exPostbox} onChange={e => setExPostbox(parseFloat(e.target.value))} /></td>
+                        <td><input type="number" value={exPOC} onChange={e => setExPOC(e.target.value)} /></td>
+                        <td><input type="number" value={exPostbox} onChange={e => setExPostbox(e.target.value)} /></td>
                     </tr>
 
                     <tr>
