@@ -4,19 +4,21 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import prozentWaehrung from "./standard/prozentWaehrung";
 import WaehrungBadge from "./standard/waehrungBadge";
+import nec from "./standard/nec";
 
 function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, setRechnungsbetrag: (rechnungsbetrag: number) => void }) {
     const [geo, setGeo] = useState('DE');
     const [express, setExpress] = useState(false);
 
     const [manuellerRabatt, setManuellerRabatt] = useState(false);
-    const [rabattProzent, setRabattProzent] = useState(0);
+    const [rabattProzent, setRabattProzent] = useState("0");
+    let getRabattProzent = nec(rabattProzent);
 
     const [rabattModal, setRabattModal] = useState(false);
 
     const rabatt = () => {
         if (manuellerRabatt) {
-            return rabattProzent;
+            return getRabattProzent;
         }
         if (summe >= 10000) {
             return 10;
@@ -118,7 +120,7 @@ function RechnungsfussAngebot({ summe, setRechnungsbetrag }: { summe: number, se
                                             <tr>
                                                 <th>Rabatt in %</th>
                                                 <td>
-                                                    <input type="number" value={rabattProzent} onChange={(event) => setRabattProzent(parseFloat(event.target.value))} />
+                                                    <input type="number" value={rabattProzent} onChange={(event) => setRabattProzent(event.target.value)} />
                                                 </td>
                                             </tr>
                                         </tbody>
